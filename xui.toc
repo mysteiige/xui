@@ -1,16 +1,21 @@
 ## Interface: 110007
 ## Title: xui
-## Notes: Fork and rewrite of chinese addon AddUI
-## Author: US-Mysteiige www.youtube.com/@mysteiige CN-无尽之海-简繁丶www.douyu.com/323075
+## Notes: Fork and rewrite of addon AddUI
+## Author: US-Mysteiige www.youtube.com/@mysteiige
 ## SavedVariables: xuidb
 ## Version: 0.0.1.0
 
 Functions/init.lua
 xuidb.lua
+Functions/xuiFonts.lua
+Functions/xuiOptionsData.lua
 Functions/xuiEventHandler.lua
 Functions/xuiRounding.lua
 Functions/xuiButtonSize.lua
 Functions/xuiCheckbox.lua
+Functions/xuiDropdown.lua
+Functions/xuiSlider.lua
+Functions/xuiTextbox.lua
 options.lua
 
 Locales/lang.lua

@@ -9,7 +9,9 @@ local defaults = {
     hpUnit = 1,
     buttonWidthPadding = 20,
     buttonHeightPadding = 10,
-    enableFeature = false  -- Default for the checkbox state
+    enableFeature = false,
+    fontSize = 14,
+    textStyle = "simple"
 }
 
 -- mergeDefaults into the db
@@ -39,7 +41,7 @@ local function initializeDB()
     ns.xuidb = _G.xuidb
     
     --debug
-    print("Database initialized with values:", ns.xuidb.enableFeature)
+    print("Database initialized with values:", ns.xuidb.enableFeature, ns.xuidb.fontSize, ns.xuidb.hpUnit)
 end
 
 --handle that hoe

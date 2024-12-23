@@ -81,7 +81,7 @@ Lang["enUS"] = {
     ["精通:"] = "Mastery:",
     ["全能:"] = "Vers:",
     ["Reset to Default"] = "Reset to Default",
-    ["Reload"] = "Reload"
+    ["Save"] = "Save"
 }
 
 Lang["zhCN"] = {
@@ -164,7 +164,7 @@ Lang["zhCN"] = {
     ["精通:"] = "精通:",
     ["全能:"] = "全能:",
     ["Reset to Default"] = "恢复默认并重载界面",
-    ["Reload"] = "重载"
+    ["Save"] = "重载"
 }
 
 Lang["zhTW"] = { 
