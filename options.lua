@@ -5,6 +5,18 @@ ns.tabs = ns.tabs or {}
 
 local xgui
 
+local LAYOUT = {
+    COLUMN_WIDTH = 220,
+    INITIAL_Y_OFFSET = -100, --below tabs
+    ITEM_HEIGHT = 35,
+    LEFT_MARGIN = 0,
+    COLUMN_PADDING = 20,
+    SLIDER_EXTRA_HEIGHT = 25,
+    DROPDOWN_HEIGHT = 40, --height for dropdowns, remove later (maybe)
+    TAB_WIDTH = 100,
+    TAB_SPACING = 110
+}
+
 -- Font settings
 local alpha = GetLocale()
 local alphaSwitch = {
@@ -18,6 +30,7 @@ local alphaSwitch = {
 }
 
 local fontPath = (alphaSwitch[alpha] or alphaSwitch["default"])()
+ns.fontPath = fontPath --expose globally to use elsewhere
 print("Font path set to: " .. fontPath)
 
 -- Create font cache
@@ -39,7 +52,7 @@ local function newFont(xOff, yOff, createFrame, anchorA, anchorFrame, anchorB, t
     return font
 end
 
--- Create controls for a specific category
+--creating controls for a category, hiding all the others
 local function createControls(categoryKey)
     if not ns.optionsData or not ns.optionsData.categories then
         print("Error: Options data not available")
@@ -52,46 +65,89 @@ local function createControls(categoryKey)
         return
     end
 
-    -- Hide existing controls
+    --hide them
     for _, control in pairs(ns.controls) do
         control:Hide()
     end
-    wipe(ns.controls)  -- Clear existing controls
+    wipe(ns.controls)  --wipe me down - boosie badazz
 
-    -- Create new controls
-    local yOffset = -60
-    for _, option in pairs(category.options) do
-        local control
-        if option.type == "checkbox" then
-            control = ns.newCheckbox(option.column, option.text, option.tip, option.db)
-        elseif option.type == "slider" then
-            control = ns.newSlider(option.column, option.text, option.tip, option.db,
-                option.min, option.max, option.step)
-        elseif option.type == "dropdown" then
-            control = ns.newDropdown(option.column, option.text, option.tip, option.db, option.options)
-        elseif option.type == "textbox" then
-            control = ns.newTextbox(option.column, option.text, option.tip, option.db)
-        end
+    --sort options by columns and order
+    local columnedOptions = {}
+    for optionKey, option in pairs(category.options) do 
+        local column = option.column or 1 --default to column 1 if no column specified
+        columnedOptions[column] = columnedOptions[column] or {}
+        table.insert(columnedOptions[column], {
+            key = optionKey,
+            data = option,
+            order = option.order or 999 --if no order specified, SEND HER TO THE BACK
+        })
+    end
 
-        if control then
-            control:SetPoint("TOPLEFT", xgui, "TOPLEFT", (option.column - 1) * 220, yOffset)
-            table.insert(ns.controls, control)
-            yOffset = yOffset - 30
+    --sorting within the column
+    for _, column in pairs(columnedOptions) do 
+        table.sort(column, function(a, b) return a.order < b.order end)
+    end
+
+    for column, options in pairs(columnedOptions) do 
+        local xOffset = (column - 1) * LAYOUT.TAB_WIDTH + ((column - 1) * LAYOUT.COLUMN_PADDING)
+        local yOffset = LAYOUT.INITIAL_Y_OFFSET
+
+        for _, optionData in ipairs(options) do 
+            local option = optionData.data 
+            local control 
+
+            if option.type == "checkbox" then 
+                control = ns.newCheckbox(option.column, option.text, option.tip, option.db)
+            elseif option.type == "slider" then 
+                print("createControls: Creating slider:", option.text) --debug
+                print("min:", option.min, "max:", option.max, "step:", option.step)
+                control = ns.newSlider(option.column, option.text, option.tip, option.db, option.min, option.max, option.step)
+                if control then 
+                    print("createControls: slider created") --debug
+                else
+                    print("createControls: failed to create slider")
+                end
+            elseif option.type == "dropdown" then 
+                control = ns.newDropdown(option.column, option.text, option.tip, option.db, option.options)
+            elseif option.type == "textbox" then 
+                control = ns.newTextbox(option.column, option.text, option.tip, option.db)
+            end
+
+            if control then 
+                
+                control:ClearAllPoints()
+                control:SetPoint("TOPLEFT", xgui, "TOPLEFT", xOffset, yOffset)
+                print("control positioned at:", xOffset, yOffset) --debug
+
+                table.insert(ns.controls, control)
+
+                if option.type == "slider" then 
+                    yOffset = yOffset - (LAYOUT.ITEM_HEIGHT + LAYOUT.SLIDER_EXTRA_HEIGHT) --more space needed because of the text
+                    print("slider dimensions:", control:GetWidth(), control:GetHeight()) --debug
+                    print("is visible?", control:IsVisible()) --debug
+                elseif option.type == "dropdown" then 
+                    yOffset = yOffset - LAYOUT.DROPDOWN_HEIGHT 
+                else
+                    yOffset = yOffset - LAYOUT.ITEM_HEIGHT
+                end
+
+                yOffset = yOffset - 5
+                
+            end
         end
     end
 end
 
--- Create the tab frame
 local function createTabFrame()
     local tabFrame = CreateFrame("Frame", "xuiTabFrame", xgui)
     tabFrame:SetSize(800, 30)
-    tabFrame:SetPoint("TOPLEFT", xgui, "TOPLEFT", 0, -30)
+    tabFrame:SetPoint("TOPLEFT", xgui, "TOPLEFT", 0, -30) --anchor
 
     ns.tabs = {}
     return tabFrame
 end
 
--- Select a tab and show its options
+--select the tab and hide the other shit
 local function selectTab(categoryKey)
     for _, control in pairs(ns.controls) do
         control:Hide()
@@ -133,7 +189,7 @@ local function styleButtonText(button, size)
     end
 end
 
--- Create tabs for each category
+--create the tab buttons if it meets certain checks
 local function createTabs()
     print("ns.optionsData exists:", ns.optionsData ~= nil)
     print("ns.optionsData.categories exists:", ns.optionsData.categories ~= nil)
@@ -189,7 +245,10 @@ ns.xuie("ADDON_LOADED", function(addonName)
     end
 
     xgui = CreateFrame("Frame")
+    xgui:EnableMouse(true)
+    xgui:SetSize(800, 600)
     _G.xgui = xgui
+    ns.xgui = xgui
 
     local cat = Settings.RegisterCanvasLayoutCategory(xgui, "XUI")
     Settings.RegisterAddOnCategory(cat)
@@ -200,7 +259,7 @@ ns.xuie("ADDON_LOADED", function(addonName)
     header:SetText("XUI")
 
     local header = ns.CreateFontString(xgui, "SUBHEADER")
-    header:SetPoint("BOTTOMLEFT", xgui, "BOTTOMRIGHT", 5, 0)
+    header:SetPoint("TOPLEFT", xgui, "TOPLEFT", 60, -10)
     header:SetText(" - a lightweight user interface.")
 
 

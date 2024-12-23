@@ -17,6 +17,7 @@ local function newDropdown(column, text, tip, db, options)
     ]]
 
     local dropdown = CreateFrame("Frame", "xuiDropdown" .. text, xgui, "UIDropDownMenuTemplate")
+    dropdown:SetWidth(180)
 
     if not dropdown then
         print("Failed to create dropdown frame")

@@ -8,6 +8,7 @@
 Functions/init.lua
 xuidb.lua
 Functions/Menu/xuiFonts.lua
+Functions/Menu/xuiStyleText.lua
 Functions/Data/xuiOptionsData.lua
 Functions/Data/xuiEventHandler.lua
 Functions/Math/xuiRounding.lua

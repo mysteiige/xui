@@ -10,17 +10,19 @@ ns.optionsData = {
                     column = 1,
                     text = "Enable Feature",
                     tip = "This enables or disables the feature.",
-                    db = "enableFeature"
+                    db = "enableFeature",
+                    order = 1
                 },
                 fontSize = {
                     type = "slider",
-                    column = 2,
+                    column = 1,
                     text = "Font Size",
                     tip = "Adjusts the size of the addon's font.",
                     db = "fontSize",
                     min = 8,
                     max = 24,
-                    step = 1
+                    step = 1,
+                    order = 2
                 },
                 hpUnit = {
                     type = "dropdown",
@@ -32,15 +34,16 @@ ns.optionsData = {
                         [1] = "Imperial (K/M/B)",
                         [2] = "Chinese (万/亿)",
                         [3] = "Alternate Chinese"
-                    }
+                    },
+                    order = 3
                 }
             },
             order = 1
         },
         nameplates = {
-            name = "Nameplates",
+            name = "Soon",
             options = {
-
+                
             },
             order = 2
         },
