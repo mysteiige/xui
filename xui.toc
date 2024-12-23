@@ -1,6 +1,6 @@
 ## Interface: 110007
 ## Title: xui
-## Notes: Fork and rewrite of addon AddUI
+## Notes: lightweight user interface addon.
 ## Author: US-Mysteiige www.youtube.com/@mysteiige
 ## SavedVariables: xuidb
 ## Version: 0.0.1.0
