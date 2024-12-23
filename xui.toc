@@ -7,15 +7,15 @@
 
 Functions/init.lua
 xuidb.lua
-Functions/xuiFonts.lua
-Functions/xuiOptionsData.lua
-Functions/xuiEventHandler.lua
-Functions/xuiRounding.lua
-Functions/xuiButtonSize.lua
-Functions/xuiCheckbox.lua
-Functions/xuiDropdown.lua
-Functions/xuiSlider.lua
-Functions/xuiTextbox.lua
+Functions/Menu/xuiFonts.lua
+Functions/Data/xuiOptionsData.lua
+Functions/Data/xuiEventHandler.lua
+Functions/Math/xuiRounding.lua
+Functions/Menu/xuiButtonSize.lua
+Functions/Menu/xuiCheckbox.lua
+Functions/Menu/xuiDropdown.lua
+Functions/Menu/xuiSlider.lua
+Functions/Menu/xuiTextbox.lua
 options.lua
 
 Locales/lang.lua
