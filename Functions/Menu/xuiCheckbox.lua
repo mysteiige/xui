@@ -1,67 +1,61 @@
 local ns = XUI
 
-local function newCheckbox(column, text, tip, db)
-    print("Creating checkbox:", text, " in column: ", column)
+local function newCheckbox(column, text, tip, db) 
 
-    if column < 1 or column > 3 then
-        print("Invalid column value: ", column)
-        return
+    --genesis 1
+    local check = CreateFrame("Frame", nil, xgui)
+    print("newCheckbox: creating frame", text)
+    check:SetSize(180, 30)
+
+    local checkWidget = CreateFrame("CheckButton", nil, check, "InterfaceOptionsCheckButtonTemplate")
+    print("newCheckbox: creating check widget")
+    checkWidget:SetPoint("LEFT", check, "LEFT", 0, 0)
+
+    if xuidb[db] == nil then 
+        xuidb[db] = false
     end
+    print("newCheckbox: populating field with", xuidb[db])
+    checkWidget:SetChecked(xuidb[db])
 
-    local xOffset = {16, 226, 446} 
-    local yOffset = -60
+    local label = check:CreateFontString(nil, "ARTWORK")
+    if not label then print("newCheckbox: failed to create font string") return end
+    label:SetPoint("LEFT", checkWidget, "RIGHT", 0, 0)
+    ns.styleText(label)
+    label:SetText(text)
 
-    --[[
-        Changes here will be nessecary in the long term. Mostly going to be re-doing all the menu content.
-        Right now everything is hard-coded in place inside the menu
-    ]]
+    checkWidget:EnableMouse(true)
 
-    --creation
-    local check = CreateFrame("CheckButton", "xuiCheck" .. text, xgui, "InterfaceOptionsCheckButtonTemplate")
-
-    if not check then
-        print("Failed to create checkbox frame")
-        return
-    end
-
-    --set position (remove later)
-    check:SetPoint("TOPLEFT", xgui, "TOPLEFT", xOffset[column], yOffset)
-    yOffset = yOffset - 30 -- Adjust vertical spacing for the next control
-
-    --populate button if needed
-    if ns.xuidb[db] ~= nil then
-        check:SetChecked(ns.xuidb[db])
-    else
-        check:SetChecked(false)
-        ns.xuidb[db] = false
-    end
-
-    print("Checkbox made successfully")
-
-    check.text:SetText(text)
-    check.tooltipText = tip
-    check.db = db
-
-    check:SetScript("OnClick", function(self)
+    checkWidget:SetScript("OnClick", function(self) 
+    
         local newState = self:GetChecked()
-        ns.xuidb[db] = newState
-        print("Checkbox", text, "state changed to:", newState)
+        xuidb[db] = newState
+
+        print("newCheckbox: checkbox value changed:", db, "=", newState)
+
+        --settings function for later
+        if ns.ApplySettings then 
+            ns.ApplySettings()
+        end
+    
     end)
 
-    --tooltip
-    check:SetScript("OnEnter", function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText(tip, nil, nil, nil, nil, true)
-        GameTooltip:Show()
-    end)
+    if tip then 
+        checkWidget:SetScript("OnEnter", function(self) 
+    
+            GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+            GameTooltip:SetText(tip, nil, nil, nil, true)
+            GameTooltip:Show()
 
-    check:SetScript("OnLeave", function()
-        GameTooltip:Hide()
-    end)
+        end)
 
-    ns.ApplyFontStyle(check.text, "NORMAL")
+        checkWidget:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
+    
+    end
+
+    if checkWidget.text then checkWidget.text:Hide() end
 
     return check
+
 end
 
 ns.newCheckbox = newCheckbox

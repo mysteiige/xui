@@ -7,8 +7,8 @@ local xgui
 
 local LAYOUT = {
     COLUMN_WIDTH = 220,
-    INITIAL_Y_OFFSET = -100, --below tabs
-    ITEM_HEIGHT = 35,
+    INITIAL_Y_OFFSET = -60, --below tabs
+    ITEM_HEIGHT = 30,
     LEFT_MARGIN = 0,
     COLUMN_PADDING = 20,
     SLIDER_EXTRA_HEIGHT = 25,
