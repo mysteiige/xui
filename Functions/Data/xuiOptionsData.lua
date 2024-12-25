@@ -2,60 +2,36 @@ local ns = XUI
 
 ns.optionsData = {
     categories = {
-        general = {
-            name = "General",
+        playerFrame = {
+            name = "Player Frame",
             options = {
-                enableFeature = {
-                    type = "checkbox",
+                classColorHealth = {
+                    type = "checkbox", 
                     column = 1,
-                    text = "Enable Feature",
-                    tip = "This enables or disables the feature.",
-                    db = "enableFeature",
+                    text = "Class Color Health",
+                    tip = "Colors your health bar based on your Blizzard class color",
+                    db = "classColorHealth",
                     order = 1
-                },
-                fontSize = {
-                    type = "slider",
-                    column = 1,
-                    text = "Font Size",
-                    tip = "Adjusts the size of the addon's font.",
-                    db = "fontSize",
-                    min = 8,
-                    max = 24,
-                    step = 1,
-                    order = 2
-                },
-                hpUnit = {
-                    type = "dropdown",
-                    column = 1,
-                    text = "HP Unit Style",
-                    tip = "Choose how health values are displayed",
-                    db = "hpUnit",
-                    options = {
-                        [1] = "Imperial (K/M/B)",
-                        [2] = "Chinese (万/亿)",
-                        [3] = "Alternate Chinese"
-                    },
-                    order = 3
                 }
             },
             order = 1
         },
-        nameplates = {
-            name = "Soon",
+        otherFrame = {
+            name = "Other Frames",
             options = {
                 
             },
             order = 2
         },
-        example1 = {
-            name = "Soon",
+        actionBar = {
+            name = "Action Bars",
             options = {
 
             },
             order = 3
         },
-        example2 = {
-            name = "Soon",
+        nameplates = {
+            name = "Nameplates",
             options = {
                 
             },

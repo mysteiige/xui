@@ -278,12 +278,25 @@ ns.xuie("ADDON_LOADED", function(addonName)
         ReloadUI()
     end)
 
-    local reload = CreateFrame("Button", "xuiSave", xgui, "UIPanelButtonTemplate")
-    reload:SetText(GetLocText("Save"))
-    local buttonWidth, buttonHeight = ns.getButtonSize(reload)
-    reload:SetSize(buttonWidth, buttonHeight)
-    reload:SetPoint("BOTTOMRIGHT")
-    reload:SetScript("OnClick", function() ReloadUI() end)
+    local save = CreateFrame("Button", "xuiSave", xgui, "UIPanelButtonTemplate")
+    save:SetText(GetLocText("Save"))
+    local buttonWidth, buttonHeight = ns.getButtonSize(save)
+    save:SetSize(buttonWidth, buttonHeight)
+    save:SetPoint("BOTTOMRIGHT")
+    save:SetScript("OnClick", function() ReloadUI() end)
+
+    local apply = CreateFrame("Button", "xuiApply", xgui, "UIPanelButtonTemplate")
+    apply:SetText(GetLocText("Apply"))
+    local buttonWidth2, buttonHeight2 = ns.getButtonSize(apply)
+    apply:SetSize(buttonWidth, buttonHeight)
+    apply:SetPoint("BOTTOMRIGHT", save, "BOTTOMLEFT", 0, 0)
+    apply:SetScript("OnClick", function() 
+        if ns.ApplySettings then 
+            for _, func in pairs(ns.ApplySettings) do 
+                func()
+            end
+        end
+    end)
 
     -- Create version text
     local adverts = ns.CreateFontString(xgui, "NORMAL")
@@ -298,7 +311,8 @@ ns.xuie("ADDON_LOADED", function(addonName)
 
     --stylize the buttons
     ns.StyleButton(reset, "NORMAL")
-    ns.StyleButton(reload, "NORMAL")
+    ns.StyleButton(save, "NORMAL")
+    ns.StyleButton(apply, "NORMAL")
 
     print("XUI Menu initialized")
 end)

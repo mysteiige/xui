@@ -1,6 +1,6 @@
 local ns = XUI
 
-ns.FONTS = {
+FONTS = {
     PATH = (function()
         local locale = GetLocale()
         if locale == "zhCN" or locale == "zhTW" then
@@ -41,8 +41,9 @@ ns.FONTS = {
         }
     }
 }
+ns.FONTS = FONTS
 
-function ns.ApplyFontStyle(fontString, style)
+local function ApplyFontStyle(fontString, style)
     if not fontString or not style then return end
     
     local styleData = ns.FONTS.STYLES[style] or ns.FONTS.STYLES.NORMAL
@@ -57,16 +58,19 @@ function ns.ApplyFontStyle(fontString, style)
         fontString:SetShadowOffset(unpack(styleData.shadow.offset))
     end
 end
+ns.ApplyFontStyle = ApplyFontStyle
 
-function ns.CreateFontString(parent, style, layer)
+local function CreateFontString(parent, style, layer)
     local fontString = parent:CreateFontString(nil, layer or "OVERLAY")
-    ns.ApplyFontStyle(fontString, style or "NORMAL")
+        ApplyFontStyle(fontString, style or "NORMAL")
     return fontString
 end
+ns.CreateFontString = CreateFontString
 
-function ns.StyleButton(button, style)
+local function StyleButton(button, style)
     local fontString = button:GetFontString()
     if fontString then
-        ns.ApplyFontStyle(fontString, style)
+        ApplyFontStyle(fontString, style)
     end
 end
+ns.StyleButton = StyleButton

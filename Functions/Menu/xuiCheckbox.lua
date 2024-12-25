@@ -34,9 +34,10 @@ local function newCheckbox(column, text, tip, db)
 
         --settings function for later
         if ns.ApplySettings then 
-            ns.ApplySettings()
+            for moduleName, func in pairs(ns.ApplySettings) do 
+                func()
+            end
         end
-    
     end)
 
     if tip then 

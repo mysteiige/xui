@@ -3,12 +3,13 @@
 ## Notes: lightweight user interface addon.
 ## Author: US-Mysteiige www.youtube.com/@mysteiige
 ## SavedVariables: xuidb
-## Version: 0.0.1.0
+## Version: 0.0.1
 
 Functions/init.lua
 xuidb.lua
 Functions/Menu/xuiFonts.lua
 Functions/Menu/xuiStyleText.lua
+Functions/Menu/xuiApplySettings.lua
 Functions/Data/xuiOptionsData.lua
 Functions/Data/xuiEventHandler.lua
 Functions/Math/xuiRounding.lua
@@ -17,6 +18,7 @@ Functions/Menu/xuiCheckbox.lua
 Functions/Menu/xuiDropdown.lua
 Functions/Menu/xuiSlider.lua
 Functions/Menu/xuiTextbox.lua
+Features/UI/xuiPlayerFrame.lua
 options.lua
 
 Locales/lang.lua

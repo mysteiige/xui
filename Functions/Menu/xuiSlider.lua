@@ -67,7 +67,9 @@ local function newSlider(column, text, tip, db, min, max, step)
         
         --settings function for later
         if ns.ApplySettings then
-            ns.ApplySettings()
+            for moduleName, func in pairs(ns.ApplySettings) do 
+                func()
+            end
         end
     end)
     

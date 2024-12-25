@@ -32,7 +32,9 @@ local function newDropdown(column, text, tip, db, options)
 
                 --stuff for later
                 if ns.ApplySettings then 
-                    ns.ApplySettings()
+                    for moduleName, func in pairs(ns.ApplySettings) do 
+                        func()
+                    end
                 end
             end
             info.checked = (i == xuidb[db])
