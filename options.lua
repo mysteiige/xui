@@ -23,7 +23,6 @@ local alphaSwitch = {
     zhCN = function() return "fonts\\ARHei.ttf" end,
     zhTW = function() return "fonts\\ARHei.ttf" end,
     enUS = function()
-        print("Locale is English (US). Using LexieReadable font.")
         return "fonts\\LexieReadable-Regular.ttf"
     end,
     default = function() return "fonts\\ARHei.ttf" end
@@ -31,7 +30,6 @@ local alphaSwitch = {
 
 local fontPath = (alphaSwitch[alpha] or alphaSwitch["default"])()
 ns.fontPath = fontPath --expose globally to use elsewhere
-print("Font path set to: " .. fontPath)
 
 -- Create font cache
 local fontCache = {}
@@ -99,14 +97,7 @@ local function createControls(categoryKey)
             if option.type == "checkbox" then 
                 control = ns.newCheckbox(option.column, option.text, option.tip, option.db)
             elseif option.type == "slider" then 
-                print("createControls: Creating slider:", option.text) --debug
-                print("min:", option.min, "max:", option.max, "step:", option.step)
                 control = ns.newSlider(option.column, option.text, option.tip, option.db, option.min, option.max, option.step)
-                if control then 
-                    print("createControls: slider created") --debug
-                else
-                    print("createControls: failed to create slider")
-                end
             elseif option.type == "dropdown" then 
                 control = ns.newDropdown(option.column, option.text, option.tip, option.db, option.options)
             elseif option.type == "textbox" then 
@@ -117,14 +108,11 @@ local function createControls(categoryKey)
                 
                 control:ClearAllPoints()
                 control:SetPoint("TOPLEFT", xgui, "TOPLEFT", xOffset, yOffset)
-                print("control positioned at:", xOffset, yOffset) --debug
 
                 table.insert(ns.controls, control)
 
                 if option.type == "slider" then 
                     yOffset = yOffset - (LAYOUT.ITEM_HEIGHT + LAYOUT.SLIDER_EXTRA_HEIGHT) --more space needed because of the text
-                    print("slider dimensions:", control:GetWidth(), control:GetHeight()) --debug
-                    print("is visible?", control:IsVisible()) --debug
                 elseif option.type == "dropdown" then 
                     yOffset = yOffset - LAYOUT.DROPDOWN_HEIGHT 
                 else
@@ -191,8 +179,6 @@ end
 
 --create the tab buttons if it meets certain checks
 local function createTabs()
-    print("ns.optionsData exists:", ns.optionsData ~= nil)
-    print("ns.optionsData.categories exists:", ns.optionsData.categories ~= nil)
 
     if not ns.optionsData or not ns.optionsData.categories then
         print("Error: ns.optionsData.categories is nil. Cannot create tabs.")
@@ -236,9 +222,6 @@ end
 ns.xuie("ADDON_LOADED", function(addonName)
     if addonName ~= "xui" then return end
     
-    print("ADDON_LOADED fired for XUI")
-    print("Options data exists:", ns.optionsData ~= nil)
-    
     if not ns.optionsData then
         print("Error: Options data not loaded")
         return
@@ -264,7 +247,6 @@ ns.xuie("ADDON_LOADED", function(addonName)
 
 
     -- Create tabs only after ensuring options data is loaded
-    print("Creating tabs...")
     createTabs()
 
     -- Create buttons
@@ -314,12 +296,8 @@ ns.xuie("ADDON_LOADED", function(addonName)
     ns.StyleButton(save, "NORMAL")
     ns.StyleButton(apply, "NORMAL")
 
-    print("XUI Menu initialized")
 end)
 
 ns.xuie("ADDON_LOADED", function()
-    print("Options frame exists: ", xgui ~= nil)
-    print("Options data exists: ", ns.optionsData ~= nil)
-
     ns.debugEvents()
 end)

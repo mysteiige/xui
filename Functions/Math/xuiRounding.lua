@@ -1,6 +1,5 @@
 --rounding logic
-local ns = XUI
-print("ns value at start of rounding module: ", ns) 
+local ns = XUI 
 local eventFrame
 
 --format helper function

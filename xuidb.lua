@@ -6,12 +6,10 @@ ns.xuidbv = C_AddOns.GetAddOnMetadata(AddonName, "Version")
 
 --defaults
 local defaults = {
-    hpUnit = 1,
     buttonWidthPadding = 20,
     buttonHeightPadding = 10,
-    enableFeature = false,
-    fontSize = 14,
-    textStyle = "simple"
+    classColorHealth = false,
+    customPlayerFont = false
 }
 
 -- mergeDefaults into the db
@@ -39,9 +37,6 @@ local function initializeDB()
     _G.xuidb = mergeDefaults(_G.xuidb, defaults)
     
     ns.xuidb = _G.xuidb
-    
-    --debug
-    print("Database initialized with values:", ns.xuidb.enableFeature, ns.xuidb.fontSize, ns.xuidb.hpUnit)
 end
 
 --handle that hoe

@@ -62,9 +62,6 @@ local function newSlider(column, text, tip, db, min, max, step)
         --update value
         valueText:SetText(value)
         
-        -- Print for debugging
-        print("Slider value changed:", db, "=", value)
-        
         --settings function for later
         if ns.ApplySettings then
             for moduleName, func in pairs(ns.ApplySettings) do 

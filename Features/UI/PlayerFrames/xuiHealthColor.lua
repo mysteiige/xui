@@ -12,17 +12,14 @@ local function UpdatePlayerFrameHealth()
 
     if xuidb.classColorHealth then 
         local _, className = UnitClass("player")
-        print("xuiPlayerFrame: getting unitclass")
 
         if className then 
             local classColor = RAID_CLASS_COLORS[className]
             if classColor then 
-                print("xuiPlayerFrame: starting coloring")
                 healthBar:SetStatusBarDesaturated(true)
                 healthBar:SetStatusBarColor(classColor.r, classColor.g, classColor.b)
                 --healthBar.Fill:SetVertexColor(classcolor.r, classColor.g, classColor.b)
                 healthBar:SetValue(UnitHealth("player"))
-                print("xuiPlayerFrame: success coloring!")
             end
         end
     else
@@ -30,7 +27,6 @@ local function UpdatePlayerFrameHealth()
         healthBar:SetStatusBarColor(0, 1, 0)
         --healthBar.Fill:SetVertexColor(0, 1, 0)
         healthBar:SetValue(UnitHealth("player"))
-        print("xuiPlayerFrame: something failed! back to default values.")
     end
 end
 

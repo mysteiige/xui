@@ -53,6 +53,3 @@ ns.optionsData = {
         }
     }
 }
-
-print("xuiOptionsData.lua loaded successfully") --debug
-print("options data structure: ", ns.optionsData)

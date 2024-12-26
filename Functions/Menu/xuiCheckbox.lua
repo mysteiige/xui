@@ -4,17 +4,14 @@ local function newCheckbox(column, text, tip, db)
 
     --genesis 1
     local check = CreateFrame("Frame", nil, xgui)
-    print("newCheckbox: creating frame", text)
     check:SetSize(180, 30)
 
     local checkWidget = CreateFrame("CheckButton", nil, check, "InterfaceOptionsCheckButtonTemplate")
-    print("newCheckbox: creating check widget")
     checkWidget:SetPoint("LEFT", check, "LEFT", 0, 0)
 
     if xuidb[db] == nil then 
         xuidb[db] = false
     end
-    print("newCheckbox: populating field with", xuidb[db])
     checkWidget:SetChecked(xuidb[db])
 
     local label = check:CreateFontString(nil, "ARTWORK")

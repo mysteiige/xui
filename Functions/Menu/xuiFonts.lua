@@ -38,6 +38,15 @@ FONTS = {
                 color = {0, 0, 0, 1},
                 offset = {1, -1}
             }
+        },
+        CHATBAR = {
+            size = 14, 
+            flags = "OUTLINE", 
+            color = {1, 1, 1, 1},
+            shadow = {
+                color = {0, 0, 0, 1},
+                offset = {1, -1}
+            }
         }
     }
 }
