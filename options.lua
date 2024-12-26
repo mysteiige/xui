@@ -261,12 +261,13 @@ ns.xuie("ADDON_LOADED", function(addonName)
     end)
 
     local save = CreateFrame("Button", "xuiSave", xgui, "UIPanelButtonTemplate")
-    save:SetText(GetLocText("Save"))
+    save:SetText(GetLocText("Apply"))
     local buttonWidth, buttonHeight = ns.getButtonSize(save)
     save:SetSize(buttonWidth, buttonHeight)
     save:SetPoint("BOTTOMRIGHT")
     save:SetScript("OnClick", function() ReloadUI() end)
 
+    --[[
     local apply = CreateFrame("Button", "xuiApply", xgui, "UIPanelButtonTemplate")
     apply:SetText(GetLocText("Apply"))
     local buttonWidth2, buttonHeight2 = ns.getButtonSize(apply)
@@ -279,6 +280,7 @@ ns.xuie("ADDON_LOADED", function(addonName)
             end
         end
     end)
+    ]]
 
     -- Create version text
     local adverts = ns.CreateFontString(xgui, "NORMAL")

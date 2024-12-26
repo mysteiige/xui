@@ -9,9 +9,53 @@ local channels = {
     {name = "Instance", text = "I",    command = "/i ",     color = {1, 0.8, 0}}        --orange
 }
 
+local buttonContainer
+
+local function DestroyChannelButtons()
+    if buttonContainer then 
+        print("button clicked")
+        --child frames
+        local children = {buttonContainer:GetChildren()}
+
+        for _, child in ipairs(children) do 
+            print("child: ", child)
+            child:SetScript("OnClick")
+            child:UnregisterAllEvents()
+
+            --clear the children
+            local regions = {child:GetRegions()}
+            if not regions then 
+                print("unable to get regions")
+                return 
+            end
+            
+            for _, region in ipairs(regions) do 
+                print("region:", region)
+                region:Hide()
+                region:ClearAllPoints()
+                region:SetText("")
+                region = nil
+            end
+
+            child:Hide()
+            child:ClearAllPoints()
+            child:SetParent(nil)
+            child = nil
+        end
+
+        buttonContainer:UnregisterAllEvents()
+        buttonContainer:ClearAllPoints()
+        buttonContainer:Hide()
+        buttonContainer:SetParent(nil)
+        buttonContainer = nil
+
+        collectgarbage("collect")
+    end
+end
+
 local function CreateChannelButtons()
     --genesis 1
-    local buttonContainer = CreateFrame("Frame", "xuiChatBar", UIParent)
+    buttonContainer = CreateFrame("Frame", "xuiChatBar", UIParent)
     buttonContainer:SetPoint("BOTTOMLEFT", 0, 0)
     buttonContainer:SetHeight(50) --make it show
     buttonContainer:Show()
@@ -132,9 +176,21 @@ local function CreateChannelButtons()
 
 end
 
+local function UpdateChatButtons()
+    if xuidb.chatButtons then 
+        if not buttonContainer then 
+            CreateChannelButtons()
+        end
+    else
+        DestroyChannelButtons()
+    end
+end
+
 ns.xuie("ADDON_LOADED", function(addon)
 
     if addon ~= "xui" then return end
-    CreateChannelButtons()
+    UpdateChatButtons()
 
 end)
+
+ns.RegisterApplySettings("chatButtons", UpdateChatButtons)

@@ -9,7 +9,8 @@ local defaults = {
     buttonWidthPadding = 20,
     buttonHeightPadding = 10,
     classColorHealth = false,
-    customPlayerFont = false
+    customPlayerFont = false,
+    chatButtons = true
 }
 
 -- mergeDefaults into the db

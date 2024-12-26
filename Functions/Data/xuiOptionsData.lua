@@ -19,7 +19,14 @@ ns.optionsData = {
         otherFrame = {
             name = "Other Frames",
             options = {
-                
+                chatButtons = {
+                    type = "checkbox",
+                    column = 1, 
+                    text = "Chat Buttons",
+                    tip = "Shows quick access buttons for the chatbox in the bottom left",
+                    db = "chatButtons",
+                    order = 1
+                }
             },
             order = 2
         },
@@ -44,8 +51,8 @@ ns.optionsData = {
             },
             order = 5
         },
-        example4 = {
-            name = "Soon",
+        other = {
+            name = "Other",
             options = {
 
             },
