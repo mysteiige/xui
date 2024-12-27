@@ -43,7 +43,6 @@ local function SaveChatMessage(msg, author, ...)
 
     --add to table
     table.insert(messageHistory[chatEvent], 1, entry)
-    print("XUI Chat History: Message saved successfully")
 
     --exclude if exceeding maximum
     while #messageHistory[chatEvent] > MAX_MESSAGES do
@@ -53,7 +52,6 @@ local function SaveChatMessage(msg, author, ...)
 end
 
 local function RestoreChatHistory()
-    print("XUI Chat History: Attempting to restore history")
 
     if not xuidb.chatHistory then print("XUI Chat History: Chat history is disabled, not restoring") return end 
 
@@ -83,13 +81,10 @@ local function RestoreChatHistory()
     end
 
     chatFrame:AddMessage("|cFFFFFF00[Chat History End]|r")
-    print("XUI Chat History: Restoration complete")
 end
 
 --register events
 local function Initialize()
-
-    print("XUI Chat History: Initializing")
 
     if isInitialized then print("XUI Chat History: Already initialized, skipping") return end
 
@@ -98,43 +93,28 @@ local function Initialize()
     --all chat messages
     for _, channel in ipairs(SAVE_CHANNELS) do 
         local event = "CHAT_MSG_" .. channel
-        print("XUI Chat History: Registering event:", event)
         ns.xuie(event, SaveChatMessage)
     end
 
     if xuidb.chatHistory then 
-        print("XUI Chat History: Chat history is enabled")
         if xuidb.savedChatHistory then 
-            print("XUI Chat History: Found saved history")
             messageHistory = xuidb.savedChatHistory
             C_Timer.After(1, RestoreChatHistory)
-        else 
-            print("XUI Chat History: No saved history found")
         end
-    else
-        print("XUI Chat History: Chat history is disabled")
     end
     isInitialized = true
-    print("XUI Chat History: Initialization complete")
 end
 
 --save when logging out
 local function OnPlayerLogout()
-    print("XUI Chat History: Player logging out")
     if xuidb.chatHistory then 
-        print("XUI Chat History: Saving history to database")
         xuidb.savedChatHistory = messageHistory
-        print("XUI Chat History: History saved")
-    else
-        print("XUI Chat History: Chat history disabled, not saving")
     end
 end
 
 --load when logging in 
 local function UpdateChatHistory() 
-    print("XUI Chat History: Settings updated")
     if not xuidb.chatHistory then 
-        print("XUI Chat History: Chat history disabled, clearing history")
         messageHistory = {}
         xuidb.savedChatHistory = nil
     end
@@ -142,7 +122,6 @@ end
 
 ns.xuie("ADDON_LOADED", function(addon) 
     if addon ~= "xui" then return end
-    print("XUI Chat History: XUI addon loaded, starting initialization")
     Initialize()
 end)
 
@@ -150,5 +129,3 @@ ns.xuie("PLAYER_LOGOUT", OnPlayerLogout)
 
 --register with settings
 ns.RegisterApplySettings("chatHistory", UpdateChatHistory)
-
-print("XUI Chat History: Module Loaded")

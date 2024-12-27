@@ -12,6 +12,7 @@ Functions/Menu/xuiStyleText.lua
 Functions/Menu/xuiApplySettings.lua
 Functions/Data/xuiOptionsData.lua
 Functions/Data/xuiEventHandler.lua
+Functions/Math/xuiStringComp.lua
 Functions/Math/xuiRounding.lua
 Functions/Menu/xuiButtonSize.lua
 Functions/Menu/xuiCheckbox.lua
