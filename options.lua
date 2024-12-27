@@ -296,7 +296,7 @@ ns.xuie("ADDON_LOADED", function(addonName)
     --stylize the buttons
     ns.StyleButton(reset, "NORMAL")
     ns.StyleButton(save, "NORMAL")
-    ns.StyleButton(apply, "NORMAL")
+    --ns.StyleButton(apply, "NORMAL")
 
 end)
 

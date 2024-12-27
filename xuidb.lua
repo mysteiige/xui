@@ -10,7 +10,9 @@ local defaults = {
     buttonHeightPadding = 10,
     classColorHealth = false,
     customPlayerFont = false,
-    chatButtons = true
+    chatButtons = true,
+    chatHistory = true,
+    savedChatHistory = {}
 }
 
 -- mergeDefaults into the db

@@ -26,6 +26,14 @@ ns.optionsData = {
                     tip = "Shows quick access buttons for the chatbox in the bottom left",
                     db = "chatButtons",
                     order = 1
+                },
+                chatHistory = {
+                    type = "checkbox",
+                    column = 1, 
+                    text = "Save Chat History",
+                    tip = "Preserves your chat history between game sessions",
+                    db = "chatHistory",
+                    order = 2
                 }
             },
             order = 2

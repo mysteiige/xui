@@ -19,7 +19,8 @@ Functions/Menu/xuiDropdown.lua
 Functions/Menu/xuiSlider.lua
 Functions/Menu/xuiTextbox.lua
 Features/UI/PlayerFrames/xuiHealthColor.lua
-Features/UI/Misc/xuiChatBar.lua
+Features/UI/Chat/xuiChatBar.lua
+Features/UI/Chat/xuiChatHistory.lua
 options.lua
 
 Locales/lang.lua
