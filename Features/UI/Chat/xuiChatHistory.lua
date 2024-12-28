@@ -24,10 +24,7 @@ local isInitialized = false
 
 local function SaveChatMessage(msg, author, ...)
 
-    print("message:", msg)
-    print("author:", author)
-
-    if not xuidb.chatHistory then print("XUI Chat History: Chat history is disabled, not saving") return end
+    if not xuidb.chatHistory then return end
 
     --initialize channel history
     local chatEvent = select(2, ...)

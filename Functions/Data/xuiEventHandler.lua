@@ -46,7 +46,7 @@ ns.debugEvents = function()
     --print("event frame exists: ", eventFrame ~= nil) 
     --print("handlers table exists: ", handlers ~= nil)
     for event, eventHandlers in pairs(handlers) do
-        print("Event: ", event, "Handlers: ", #eventHandlers)
+        --print("Event: ", event, "Handlers: ", #eventHandlers)
     end
 end
 

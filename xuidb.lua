@@ -12,7 +12,13 @@ local defaults = {
     customPlayerFont = false,
     chatButtons = true,
     chatHistory = true,
-    savedChatHistory = {}
+    savedChatHistory = {},
+    perfEnable = false,
+    perfFPS = true, 
+    perfLatency = true,
+    perfMemory = true,
+    perfStats = false,
+    perfPosition = {"TOPLEFT", "UIParent", "TOPLEFT", 5, -5}
 }
 
 -- mergeDefaults into the db
