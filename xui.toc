@@ -22,11 +22,6 @@ Functions/Menu/xuiTextbox.lua
 Features/UI/PlayerFrames/xuiHealthColor.lua
 Features/UI/Chat/xuiChatBar.lua
 Features/UI/Chat/xuiChatHistory.lua
-Features/UI/Misc/xuiPerformance.lua
-Features/UI/Misc/xuiFPS.lua
-Features/UI/Misc/xuiLatency.lua
-Features/UI/Misc/xuiMemory.lua
-Features/UI/Misc/xuiStats.lua
 options.lua
 
 Locales/lang.lua

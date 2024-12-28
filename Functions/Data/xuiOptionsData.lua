@@ -62,50 +62,7 @@ ns.optionsData = {
         other = {
             name = "Other",
             options = {
-                perfEnable = {
-                    type = "checkbox",
-                    column = 1,
-                    text = "Performance Monitors",
-                    tip = "Enable performance monitor displays",
-                    db = "perfEnable",
-                    order = 1
-                },
-                perfFPS = {
-                    type = "checkbox",
-                    column = 1,
-                    text = "Show FPS",
-                    tip = "Display the frames per second counter",
-                    db = "perfFPS",
-                    order = 2,
-                    depends = "perfEnable"
-                },
-                perfLatency = {
-                    type = "checkbox",
-                    column = 1,
-                    text = "Show Latency",
-                    tip = "Display network latency",
-                    db = "perfLatency",
-                    order = 3,
-                    depends = "perfEnable"
-                },
-                perfMemory = {
-                    type = "checkbox",
-                    column = 1,
-                    text = "Show Memory Usage",
-                    tip = "Display addon memory usage",
-                    db = "perfMemory",
-                    order = 4,
-                    depends = "perfEnable"
-                },
-                perfStats = {
-                    type = "checkbox",
-                    column = 1,
-                    text = "Show System Stats",
-                    tip = "Display detailed system statistics",
-                    db = "perfStats",
-                    order = 5,
-                    depends = "perfEnable"
-                }
+                
             },
             order = 6
         }
